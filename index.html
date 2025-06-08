@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Программа для управления учебным расписанием</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <button id="theme-toggle">🌙 Темная тема</button>
+
+  <h1>Программа для управления учебным расписанием</h1>
+
+  <form id="schedule-form">
+    <label for="day">День недели:</label>
+    <select id="day" required>
+      <option value="">Выберите день</option>
+      <option>Понедельник</option>
+      <option>Вторник</option>
+      <option>Среда</option>
+      <option>Четверг</option>
+      <option>Пятница</option>
+      <option>Суббота</option>
+    </select>
+
+    <label for="subject">Предмет:</label>
+    <input type="text" id="subject" required />
+
+    <label for="time">Время:</label>
+    <input type="text" id="time" placeholder="00:00 – 00:00" required />
+
+    <label for="teacher">Преподаватель:</label>
+    <input type="text" id="teacher" required />
+
+    <label for="room">Аудитория:</label>
+    <input type="text" id="room" required />
+
+    <button type="submit">Добавить</button>
+  </form>
+
+  <table id="schedule-table">
+    <thead>
+      <tr>
+        <th>День</th>
+        <th>Предмет</th>
+        <th>Время</th>
+        <th>Преподаватель</th>
+        <th>Аудитория</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Данные появятся здесь -->
+    </tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('schedule-form');
+    const tableBody = document.querySelector('#schedule-table tbody');
+
+    let schedule = JSON.parse(localStorage.getItem('schedule')) || [];
+
+    function saveSchedule() {
+      localStorage.setItem('schedule', JSON.stringify(schedule));
+    }
+
+    function renderSchedule() {
+      tableBody.innerHTML = '';
+
+      const dayOrder = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+      schedule.sort((a, b) => dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day));
+
+      let currentDay = '';
+      schedule.forEach((item, index) => {
+        if (item.day !== currentDay && currentDay !== '') {
+          const separator = document.createElement('tr');
+          separator.classList.add('separator');
+          separator.innerHTML = '<td colspan="6"></td>';
+          tableBody.appendChild(separator);
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item.day}</td>
+          <td>${item.subject}</td>
+          <td>${item.time}</td>
+          <td>${item.teacher}</td>
+          <td>${item.room}</td>
+          <td><button class="delete-btn" onclick="deleteItem(${index})">Удалить</button></td>
+        `;
+        tableBody.appendChild(row);
+        currentDay = item.day;
+      });
+    }
+
+    function deleteItem(index) {
+      schedule.splice(index, 1);
+      saveSchedule();
+      renderSchedule();
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const item = {
+        day: form.day.value,
+        subject: form.subject.value,
+        time: form.time.value,
+        teacher: form.teacher.value,
+        room: form.room.value
+      };
+      schedule.push(item);
+      saveSchedule();
+      renderSchedule();
+      form.reset();
+    });
+
+    renderSchedule();
+
+    const themeToggle = document.getElementById('theme-toggle');
+
+// Проверка сохранённой темы
+    if (localStorage.getItem('theme') === 'dark') {
+       document.body.classList.add('dark');
+      themeToggle.textContent = '☀️ Светлая тема';
+}
+
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  themeToggle.textContent = isDark ? '☀️ Светлая тема' : '🌙 Темная тема';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+  </script>
+
+</body>
+</html>

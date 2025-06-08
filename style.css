@@ -1,0 +1,198 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background:
+        linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+        url('https://images.pexels.com/photos/3059748/pexels-photo-3059748.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #0d47a1;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0d47a1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    th {
+      background-color: #eeeeee;
+      font-weight: bold;
+      padding: 12px;
+    }
+
+    td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .delete-btn {
+      background-color: #e53935;
+      margin-top: 5px;
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #b71c1c;
+    }
+
+    tr.separator td {
+      border-bottom: 3px solid #333;
+    }
+
+    body,
+    form,
+    table,
+    button,
+    th,
+    td {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+  body {
+    margin: 20px;
+  }
+
+  form, table {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  input, select, button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .delete-btn {
+    width: auto;
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: #1976d2;
+    color: white;
+    z-index: 1000;
+ }
+
+ body.dark {
+  background: #121212;
+  color: #f0f0f0;
+}
+
+body.dark form,
+body.dark table {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.dark th {
+  background-color: #2c2c2c;
+}
+
+body.dark td {
+  border-color: #444;
+}
+
+body.dark .delete-btn {
+  background-color: #c62828;
+}
+
+body.dark .delete-btn:hover {
+  background-color: #8e0000;
+}
+
+body.dark button {
+  background-color: #333;
+  color: white;
+}
+
